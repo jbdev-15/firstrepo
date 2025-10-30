@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Jane Doe — Resume</title>
+    <style>
+        :root{
+            --bg:#f6f8fb;
+            --card:#fff;
+            --accent:#0b67ff;
+            --muted:#6b7280;
+            --text:#0f1724;
+            --glass: rgba(11,103,255,0.06);
+            --radius:10px;
+            --maxw:1000px;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:20px;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background:linear-gradient(180deg,var(--bg),#fff);
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            padding:24px;
+        }
+        .sheet{
+            width:100%;
+            max-width:var(--maxw);
+            background:var(--card);
+            border-radius:var(--radius);
+            box-shadow:0 8px 30px rgba(15,23,36,0.08);
+            padding:28px;
+            display:grid;
+            grid-template-columns: 300px 1fr;
+            gap:28px;
+        }
+        header{
+            grid-column:1 / -1;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:16px;
+            margin-bottom:6px;
+        }
+        .title{
+            display:flex;
+            gap:16px;
+            align-items:center;
+        }
+        .avatar{
+            width:88px;
+            height:88px;
+            border-radius:14px;
+            background:linear-gradient(180deg,var(--glass),transparent);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:700;
+            color:var(--accent);
+            font-size:32px;
+            flex-shrink:0;
+            border:1px solid rgba(11,103,255,0.08);
+        }
+        .name{
+            line-height:1;
+        }
+        .name h1{
+            margin:0;
+            font-size:20px;
+            letter-spacing:-0.2px;
+        }
+        .name p{
+            margin:0;
+            color:var(--muted);
+            font-size:13px;
+        }
+        .actions{
+            display:flex;
+            gap:10px;
+            align-items:center;
+        }
+        .btn{
+            background:var(--accent);
+            color:#fff;
+            padding:8px 12px;
+            border-radius:8px;
+            border:0;
+            font-weight:600;
+            cursor:pointer;
+            box-shadow:0 6px 18px rgba(11,103,255,0.12);
+            font-size:13px;
+        }
+        .btn.ghost{
+            background:transparent;
+            color:var(--accent);
+            box-shadow:none;
+            border:1px solid rgba(11,103,255,0.12);
+        }
+
+        /* Layout sections */
+        nav{
+            background:linear-gradient(180deg,#fff, #fafcff);
+            padding:18px;
+            border-radius:12px;
+            border:1px solid rgba(15,23,36,0.03);
+            height:fit-content;
+        }
+        .section{
+            margin-bottom:18px;
+        }
+        .section h3{
+            margin:0 0 10px 0;
+            font-size:13px;
+            color:var(--muted);
+            letter-spacing:0.6px;
+            text-transform:uppercase;
+        }
+        .contact-list, .skills, .links{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+            font-size:14px;
+        }
+        .contact-item{
+            display:flex;
+            gap:8px;
+            align-items:center;
+            color:var(--muted);
+        }
+        .chip{
+            background:var(--glass);
+            padding:6px 8px;
+            border-radius:8px;
+            display:inline-block;
+            color:var(--accent);
+            font-weight:600;
+            font-size:13px;
+        }
+
+        main{
+            padding:18px;
+            background:linear-gradient(180deg,#fff, #fcfdff);
+            border-radius:12px;
+            border:1px solid rgba(15,23,36,0.03);
+        }
+        .summary{
+            color:var(--muted);
+            line-height:1.6;
+            margin-bottom:12px;
+        }
+        .job{
+            margin-bottom:12px;
+            border-left:3px solid rgba(11,103,255,0.08);
+            padding-left:12px;
+        }
+        .job h4{
+            margin:0;
+            font-size:16px;
+        }
+        .job .meta{
+            color:var(--muted);
+            font-size:13px;
+            margin:6px 0;
+        }
+        .job p{
+            margin:6px 0 0 0;
+            color:#24303b;
+            font-size:14px;
+            line-height:1.5;
+        }
+
+        .skills-list{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+
+        footer{
+            grid-column:1 / -1;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding-top:12px;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        @media (max-width:880px){
+            .sheet{grid-template-columns:1fr; padding:18px}
+            nav{order:2}
+        }
+
+        /* Print-friendly */
+        @media print{
+            body{margin:0; background:transparent}
+            .sheet{box-shadow:none; border-radius:0; max-width:100%}
+            .actions, .avatar{display:none}
+            .chip{display:inline-block}
+            .btn{display:none}
+            a[href]:after{content:" (" attr(href) ")"; color: #000}
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet" role="document" aria-label="Resume">
+        <header>
+            <div class="title" aria-hidden="false">
+                <div class="avatar" title="Initials">JD</div>
+                <div class="name">
+                    <h1>Jane Doe</h1>
+                    <p>Senior Front-end Engineer — React · TypeScript · UI</p>
+                </div>
+            </div>
+            <div class="actions" aria-hidden="true">
+                <button class="btn" onclick="window.print()">Download</button>
+                <button class="btn ghost" id="themeToggle">Dark</button>
+            </div>
+        </header>
+
+        <nav aria-label="Left column">
+            <div class="section">
+                <h3>Contact</h3>
+                <div class="contact-list">
+                    <div class="contact-item">📧 <span style="margin-left:6px;">jane.doe@example.com</span></div>
+                    <div class="contact-item">📞 <span style="margin-left:6px;">(555) 123-4567</span></div>
+                    <div class="contact-item">🌐 <a href="#" style="color:var(--accent);text-decoration:none;">janedoe.dev</a></div>
+                    <div class="contact-item">🔗 <a href="#" style="color:var(--accent);text-decoration:none;">github.com/janedoe</a></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Skills</h3>
+                <div class="skills-list">
+                    <span class="chip">React</span>
+                    <span class="chip">TypeScript</span>
+                    <span class="chip">HTML & CSS</span>
+                    <span class="chip">Accessibility</span>
+                    <span class="chip">Design Systems</span>
+                    <span class="chip">Testing</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Tools</h3>
+                <div class="links">
+                    <div class="contact-item">VS Code · Storybook · Jest · Cypress</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Languages</h3>
+                <div class="links">
+                    <div class="contact-item">English (Native)</div>
+                    <div class="contact-item">Spanish (Professional)</div>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <section class="section" aria-label="Profile summary">
+                <h3>Summary</h3>
+                <p class="summary">Product-focused front-end engineer with 8+ years building accessible, performant interfaces for SaaS products. Strong background in component design, cross-team collaboration, and mentoring engineers to ship consistent UI experiences.</p>
+            </section>
+
+            <section class="section" aria-label="Experience">
+                <h3>Experience</h3>
+
+                <article class="job" aria-label="Job — Senior Front-end Engineer">
+                    <h4>Senior Front-end Engineer — Acme Corp</h4>
+                    <div class="meta">Remote · 2021 — Present</div>
+                    <p>Led the redesign of the primary dashboard, built a reusable component library in TypeScript, and reduced bundle size by 22%. Mentored 6 engineers and introduced accessibility testing into CI.</p>
+                </article>
+
+                <article class="job" aria-label="Job — Front-end Engineer">
+                    <h4>Front-end Engineer — BrightApps</h4>
+                    <div class="meta">San Francisco, CA · 2018 — 2021</div>
+                    <p>Implemented responsive UI patterns, optimized critical rendering paths, and collaborated with product to improve onboarding conversion by 15%.</p>
+                </article>
+
+                <article class="job" aria-label="Job — UI Developer">
+                    <h4>UI Developer — PixelWorks</h4>
+                    <div class="meta">2016 — 2018</div>
+                    <p>Built interactive marketing sites and prototypes; introduced CSS architecture and design tokens that improved team velocity.</p>
+                </article>
+            </section>
+
+            <section class="section" aria-label="Education">
+                <h3>Education</h3>
+                <div>
+                    <strong>B.S. Computer Science</strong> — University of Somewhere, 2016
+                </div>
+            </section>
+
+            <section class="section" aria-label="Projects">
+                <h3>Selected Projects</h3>
+                <ul style="margin:8px 0 0 18px; color:#24303b;">
+                    <li><strong>Design System</strong> — Created a cross-product component library (React + Storybook).</li>
+                    <li><strong>Analytics Dashboard</strong> — Custom charts and realtime updates with WebSockets.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <div>Available for full-time roles · Open to relocation</div>
+            <div>Last updated: 2025</div>
+        </footer>
+    </div>
+
+    <script>
+        // Small theme toggle (light/dark)
+        const btn = document.getElementById('themeToggle');
+        btn.addEventListener('click', () => {
+            const dark = document.documentElement.style.getPropertyValue('--bg') === '#f6f8fb' ? false : true;
+            if (!dark) {
+                document.documentElement.style.setProperty('--bg','#0b1220');
+                document.documentElement.style.setProperty('--card','#07101a');
+                document.documentElement.style.setProperty('--accent','#6ee7b7');
+                document.documentElement.style.setProperty('--muted','#9aa6b2');
+                document.documentElement.style.setProperty('--text','#e6eef6');
+                document.documentElement.style.setProperty('--glass','rgba(110,231,183,0.06)');
+                btn.textContent = 'Light';
+            } else {
+                document.documentElement.style.setProperty('--bg','#f6f8fb');
+                document.documentElement.style.setProperty('--card','#fff');
+                document.documentElement.style.setProperty('--accent','#0b67ff');
+                document.documentElement.style.setProperty('--muted','#6b7280');
+                document.documentElement.style.setProperty('--text','#0f1724');
+                document.documentElement.style.setProperty('--glass','rgba(11,103,255,0.06)');
+                btn.textContent = 'Dark';
+            }
+        });
+    </script>
+</body>
+</html></ul></div>
